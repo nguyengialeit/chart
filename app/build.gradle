@@ -1,10 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
     defaultConfig {
-        applicationId "nguyengiale.android.v1.chart"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
