@@ -70,7 +70,7 @@ public class ArcChart extends View {
             tempCanvas.drawBitmap(bitmapStatus1, 0, mWidth / 2 + mMarginLeft, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 3, null);
+            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 2.7f, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
             tempCanvas.drawBitmap(bitmapStatus3, mWidth / 2 + mMarginLeft + (float) (mWidth * Math.tan(Math.toRadians(180 / 10)) / 2), 0, null);
@@ -107,7 +107,7 @@ public class ArcChart extends View {
             tempCanvas.drawBitmap(bitmapStatus1, 0, mWidth / 2 + mMarginLeft, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 3, null);
+            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 2.7f, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
             tempCanvas.drawBitmap(bitmapStatus3, mWidth / 2 + mMarginLeft + (float) (mWidth * Math.tan(Math.toRadians(180 / 10)) / 2), 0, null);
@@ -136,7 +136,7 @@ public class ArcChart extends View {
             tempCanvas.drawBitmap(bitmapStatus1, 0, mWidth / 2 + mMarginLeft, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_active);
-            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 3, null);
+            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 2.7f, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
             tempCanvas.drawBitmap(bitmapStatus3, mWidth / 2 + mMarginLeft + (float) (mWidth * Math.tan(Math.toRadians(180 / 10)) / 2), 0, null);
@@ -167,7 +167,7 @@ public class ArcChart extends View {
             tempCanvas.drawBitmap(bitmapStatus1, 0, mWidth / 2 + mMarginLeft, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_active);
-            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 3, null);
+            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 2.7f, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
             tempCanvas.drawBitmap(bitmapStatus3, mWidth / 2 + mMarginLeft + (float) (mWidth * Math.tan(Math.toRadians(180 / 10)) / 2), 0, null);
@@ -198,7 +198,7 @@ public class ArcChart extends View {
             tempCanvas.drawBitmap(bitmapStatus1, 0, mWidth / 2 + mMarginLeft, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 3, null);
+            tempCanvas.drawBitmap(bitmapStatus2, mWidth - mMarginLeft - mMarginLeft, mHeight / 2 + mHeight / 2.7f, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_active);
             tempCanvas.drawBitmap(bitmapStatus3, mWidth / 2 + mMarginLeft + (float) (mWidth * Math.tan(Math.toRadians(180 / 10)) / 2), 0, null);
@@ -241,12 +241,12 @@ public class ArcChart extends View {
 
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(mChartWidth * 3.5f);
+        mPaint.setTextSize(mChartWidth * 2.5f);
         int xPos = (mWidth / 2 + mMarginLeft - (int) mPaint.measureText(String.valueOf(mPoint)) / 2);
         int yPos = (int) (mHeight / 2 + mMarginTop - ((mPaint.descent() + mPaint.ascent()) / 2));
         tempCanvas.drawText(String.valueOf(mPoint), xPos, yPos, mPaint);
 
-        mPaint.setTextSize(mChartWidth);
+        mPaint.setTextSize(mChartWidth / 1.5f);
         xPos = (mWidth / 2 + mMarginLeft - (int) mPaint.measureText(getResources().getString(R.string.point_average_label)) / 2);
         tempCanvas.drawText(getResources().getString(R.string.point_average_label), xPos, yPos - (mPaint.descent() + mPaint.ascent()) * 2, mPaint);
 
