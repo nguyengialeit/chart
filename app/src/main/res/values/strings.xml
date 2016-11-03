@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Chart</string>
+    <string name="point_average_label">pt / day</string>
+</resources>
