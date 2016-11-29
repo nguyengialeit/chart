@@ -10,7 +10,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="698770c6-1788-428e-910d-e6fb25c9cc3b" name="Default" comment="" />
+    <list default="true" id="f93d18ec-bc51-4fdb-8c9b-072bfbf8c72f" name="Default" comment="" />
     <ignored path="Chart.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,21 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RadarChart.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RadarChart.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/RadarChart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArcChart.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/ArcChart.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+            <state relative-caret-position="480">
+              <caret line="177" column="151" selection-start-line="177" selection-start-column="151" selection-end-line="177" selection-end-column="151" />
               <folding />
             </state>
           </provider>
@@ -1823,14 +1813,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/RadarChart.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/ArcChart.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="732" />
+    <option name="height" value="734" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1857,6 +1846,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
@@ -1910,9 +1902,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2014,16 +2003,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="698770c6-1788-428e-910d-e6fb25c9cc3b" name="Default" comment="" />
-      <created>1480383793415</created>
+      <changelist id="f93d18ec-bc51-4fdb-8c9b-072bfbf8c72f" name="Default" comment="" />
+      <created>1480386855346</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1480383793415</updated>
+      <updated>1480386855346</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="732" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="734" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2071,16 +2060,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/RadarChart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nguyengiale/android/v1/chart/ArcChart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+        <state relative-caret-position="480">
+          <caret line="177" column="151" selection-start-line="177" selection-start-column="151" selection-end-line="177" selection-end-column="151" />
           <folding />
         </state>
       </provider>
