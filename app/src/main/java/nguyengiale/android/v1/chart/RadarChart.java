@@ -160,7 +160,7 @@ public class RadarChart extends View {
             tempCanvas.drawText("pt", mListPoint.get(5).getPullPoint() + bounds.width() + 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
 
             mPaint.setColor(Color.parseColor("#969696"));
-            mPaint.setStrokeWidth(1.5);
+            mPaint.setStrokeWidth(1);
             tempCanvas.rotate(-150, mCenterX, mCenterY);
             for (int i = 0; i < 6; i++) {
                 tempCanvas.rotate(60, mCenterX, mCenterY);
