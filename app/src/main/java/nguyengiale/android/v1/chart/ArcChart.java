@@ -44,6 +44,7 @@ public class ArcChart extends View {
             mPoint = 0;
         }
         mPaint = new Paint();
+        mPaint.setAntiAlias(true);
         mMarginLeft = 30;
         mMarginTop = 30;
         mChartWidth = converDpToPixel(context, 15);

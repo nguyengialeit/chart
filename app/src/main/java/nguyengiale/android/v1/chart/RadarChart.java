@@ -44,6 +44,7 @@ public class RadarChart extends View {
         super(context, attrs);
 
         mPaint = new Paint();
+        mPaint.setAntiAlias(true);
         setOnMeasureCallback();
     }
 
