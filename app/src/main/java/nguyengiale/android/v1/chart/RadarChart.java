@@ -160,7 +160,7 @@ public class RadarChart extends View {
             tempCanvas.drawText("pt", mListPoint.get(5).getPullPoint() + bounds.width() + 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
 
             mPaint.setColor(Color.parseColor("#969696"));
-            mPaint.setStrokeWidth(2);
+            mPaint.setStrokeWidth(1.5);
             tempCanvas.rotate(-150, mCenterX, mCenterY);
             for (int i = 0; i < 6; i++) {
                 tempCanvas.rotate(60, mCenterX, mCenterY);
@@ -175,7 +175,7 @@ public class RadarChart extends View {
                         mPaint.setStrokeWidth(2);
                     else
                         mPaint.setStrokeWidth(1);
-                    tempCanvas.drawLine(j % 5 == 0 ? mCenterX - 8 : mCenterX - 3, mCenterY - mRadius / 10 * j, j % 5 == 0 ? mCenterX + 8 : mCenterX + 3gi, mCenterY - mRadius / 10 * j, mPaint);
+                    tempCanvas.drawLine(j % 5 == 0 ? mCenterX - 8 : mCenterX - 3, mCenterY - mRadius / 10 * j, j % 5 == 0 ? mCenterX + 8 : mCenterX + 3, mCenterY - mRadius / 10 * j, mPaint);
                 }
             }
             mPaint.setStrokeWidth(1);
