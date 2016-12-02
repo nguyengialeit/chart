@@ -28,7 +28,7 @@ public class ArcChart extends View {
     private float mPoint;
     private float mRadiusChart, mRadiusLine, mMinusRadius;
     private int mLineWidth, mChartWidth;
-    private float mDrawableWidth;
+    private float mDrawableWidth, mDrawableRatio;
     private Canvas mTempCanvas;
     private Bitmap mBitmap;
 
@@ -61,7 +61,7 @@ public class ArcChart extends View {
         mRadiusChart = mCenterX - mPadding;
         mRadiusLine = mRadiusChart - mChartWidth / 2;
         mMinusRadius = ((mChartWidth / 2 + mLineWidth / 2) * 180) / (float) (Math.PI * mRadiusChart);
-        mDrawableWidth = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_active).getWidth() * 2;
+
         mBitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
         mTempCanvas = new Canvas(mBitmap);
 
@@ -78,16 +78,22 @@ public class ArcChart extends View {
 
         if (mPoint > 5.0) {
             Bitmap bitmapStatus1 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_active);
-            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, 2 * mWidth / bitmapStatus1.getWidth(), 2 * mWidth / bitmapStatus1.getHeight(), true);
-            mTempCanvas.drawBitmap(bitmapStatus1, mPadding / 2 - mDrawableWidth, mCenterY - mDrawableWidth, null);
+            mDrawableWidth = bitmapStatus1.getWidth();
+            mDrawableRatio = bitmapStatus1.getWidth() / bitmapStatus1.getHeight();
+            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus1, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(90)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(90)) + mCenterY, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, 2 * mWidth / bitmapStatus2.getWidth(), 2 * mWidth / bitmapStatus2.getHeight(), true);
-            mTempCanvas.drawBitmap(bitmapStatus2, -(mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(135)) + mCenterX, (mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(135)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus2.getWidth();
+            mDrawableRatio = bitmapStatus2.getWidth() / bitmapStatus2.getHeight();
+            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus2, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(-45)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(-45)) + mCenterY, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
-            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, 2 * mWidth / bitmapStatus3.getWidth(), 2 * mWidth / bitmapStatus3.getHeight(), true);
-            mTempCanvas.drawBitmap(bitmapStatus3, -(mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(15)) + mCenterX, (mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(15)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus3.getWidth();
+            mDrawableRatio = bitmapStatus3.getWidth() / bitmapStatus3.getHeight();
+            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus3, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(198)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(198)) + mCenterY, null);
 
             float rightPoint = mPoint - 5;
             float rightRadius = 180 / 5 * rightPoint;
@@ -118,18 +124,23 @@ public class ArcChart extends View {
             mPaint.setShader(gradient);
             mTempCanvas.drawCircle((float) endX, (float) endY, mChartWidth / 2, mPaint);
         } else if (mPoint == 5.0) {
-
             Bitmap bitmapStatus1 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_active);
-            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, bitmapStatus1.getWidth() * 2, bitmapStatus1.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus1, mPadding / 2 - mDrawableWidth, mCenterY - mDrawableWidth, null);
+            mDrawableWidth = bitmapStatus1.getWidth();
+            mDrawableRatio = bitmapStatus1.getWidth() / bitmapStatus1.getHeight();
+            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus1, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(90)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(90)) + mCenterY, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, bitmapStatus2.getWidth() * 2, bitmapStatus2.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus2, -(mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(135)) + mCenterX, (mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(135)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus2.getWidth();
+            mDrawableRatio = bitmapStatus2.getWidth() / bitmapStatus2.getHeight();
+            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus2, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(-45)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(-45)) + mCenterY, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
-            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, bitmapStatus3.getWidth() * 2, bitmapStatus3.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus3, -(mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(15)) + mCenterX, (mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(15)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus3.getWidth();
+            mDrawableRatio = bitmapStatus3.getWidth() / bitmapStatus3.getHeight();
+            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus3, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(198)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(198)) + mCenterY, null);
 
             float rightPoint = mPoint;
             float rightRadius = 180 / 5 * rightPoint;
@@ -152,18 +163,23 @@ public class ArcChart extends View {
             mPaint.setShader(gradient2);
             mTempCanvas.drawCircle((float) endX, (float) endY, mChartWidth / 2, mPaint);
         } else if (mPoint >= 1) {
-
             Bitmap bitmapStatus1 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_deactive);
-            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, bitmapStatus1.getWidth() * 2, bitmapStatus1.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus1, mPadding / 2 - mDrawableWidth, mCenterY - mDrawableWidth, null);
+            mDrawableWidth = bitmapStatus1.getWidth();
+            mDrawableRatio = bitmapStatus1.getWidth() / bitmapStatus1.getHeight();
+            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus1, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(90)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(90)) + mCenterY, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_active);
-            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, bitmapStatus2.getWidth() * 2, bitmapStatus2.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus2, -(mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(135)) + mCenterX, (mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(135)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus2.getWidth();
+            mDrawableRatio = bitmapStatus2.getWidth() / bitmapStatus2.getHeight();
+            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus2, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(-45)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(-45)) + mCenterY, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_deactive);
-            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, bitmapStatus3.getWidth() * 2, bitmapStatus3.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus3, -(mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(15)) + mCenterX, (mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(15)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus3.getWidth();
+            mDrawableRatio = bitmapStatus3.getWidth() / bitmapStatus3.getHeight();
+            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus3, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(198)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(198)) + mCenterY, null);
 
             float rightPoint = mPoint;
             float rightRadius = 180 / 5 * rightPoint;
@@ -186,18 +202,23 @@ public class ArcChart extends View {
             mPaint.setShader(gradient2);
             mTempCanvas.drawCircle((float) endX, (float) endY, mChartWidth / 2, mPaint);
         } else if (mPoint > 0) {
-
             Bitmap bitmapStatus1 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_deactive);
-            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, bitmapStatus1.getWidth() * 2, bitmapStatus1.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus1, mPadding / 2 - mDrawableWidth, mCenterY - mDrawableWidth, null);
+            mDrawableWidth = bitmapStatus1.getWidth();
+            mDrawableRatio = bitmapStatus1.getWidth() / bitmapStatus1.getHeight();
+            bitmapStatus1 = Bitmap.createScaledBitmap(bitmapStatus1, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus1, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(90)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(90)) + mCenterY, null);
 
             Bitmap bitmapStatus2 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_deactive);
-            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, bitmapStatus2.getWidth() * 2, bitmapStatus2.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus2, -(mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(135)) + mCenterX, (mPadding / 2 + mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(135)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus2.getWidth();
+            mDrawableRatio = bitmapStatus2.getWidth() / bitmapStatus2.getHeight();
+            bitmapStatus2 = Bitmap.createScaledBitmap(bitmapStatus2, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus2, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(-45)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(-45)) + mCenterY, null);
 
             Bitmap bitmapStatus3 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_1_active);
-            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, bitmapStatus3.getWidth() * 2, bitmapStatus3.getHeight() * 2, true);
-            mTempCanvas.drawBitmap(bitmapStatus3, -(mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.sin(Math.toRadians(15)) + mCenterX, (mPadding / 2 - mDrawableWidth - mCenterY) * (float) Math.cos(Math.toRadians(15)) + mCenterY, null);
+            mDrawableWidth = bitmapStatus3.getWidth();
+            mDrawableRatio = bitmapStatus3.getWidth() / bitmapStatus3.getHeight();
+            bitmapStatus3 = Bitmap.createScaledBitmap(bitmapStatus3, mPadding / 2, (int) (mPadding / 2 / mDrawableRatio), true);
+            mTempCanvas.drawBitmap(bitmapStatus3, -(mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.sin(Math.toRadians(198)) + mCenterX - mDrawableWidth / 2, (mRadiusChart + mPadding / 2 + mDrawableWidth / mDrawableRatio / 2) * (float) Math.cos(Math.toRadians(198)) + mCenterY, null);
 
             float rightPoint = mPoint;
             float rightRadius = 180 / 5 * rightPoint;
@@ -219,7 +240,7 @@ public class ArcChart extends View {
             double endY = (mRadiusChart - mChartWidth / 2) * (float) Math.cos(Math.toRadians(-180 + rightRadius - mMinusRadius)) + mCenterY;
             mPaint.setShader(gradient2);
             mTempCanvas.drawCircle((float) endX, (float) endY, mChartWidth / 2, mPaint);
-        }else{
+        } else {
             Bitmap bitmapStatus1 = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_3_deactive);
             mTempCanvas.drawBitmap(bitmapStatus1, mPadding / 2 - mDrawableWidth, mCenterY - mDrawableWidth, null);
 
@@ -233,7 +254,7 @@ public class ArcChart extends View {
 
         mPaint.setColor(Color.parseColor("#ffffff"));
         mTempCanvas.drawLine(mCenterX, mCenterY, -mRadiusChart * (float) Math.sin(Math.toRadians(180)) + mCenterX, mRadiusChart * (float) Math.cos(Math.toRadians(180)) + mCenterY, mPaint);
-        mTempCanvas.drawLine(mCenterX, mCenterY, -mRadiusChart * (float) Math.sin(Math.toRadians(216)) + mCenterX, mRadiusChart * (float) Math.cos(Math.toRadians(216)) + mCenterY, mPaint);
+        mTempCanvas.drawLine(mCenterX, mCenterY, -(mRadiusChart + 2) * (float) Math.sin(Math.toRadians(216)) + mCenterX, mRadiusChart * (float) Math.cos(Math.toRadians(216)) + mCenterY, mPaint);
         mTempCanvas.drawLine(mCenterX, mCenterY, -mRadiusChart * (float) Math.sin(Math.toRadians(0)) + mCenterX, mRadiusChart * (float) Math.cos(Math.toRadians(0)) + mCenterY, mPaint);
 
         mTempCanvas.drawCircle(mCenterX, mCenterY, mRadiusChart - mChartWidth, mPaint);
