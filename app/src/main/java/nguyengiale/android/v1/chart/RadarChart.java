@@ -1,8 +1,6 @@
 package nguyengiale.android.v1.chart;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,12 +11,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import java.util.ArrayList;
 
@@ -45,7 +39,16 @@ public class RadarChart extends View {
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        setOnMeasureCallback();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        mWidth = w;
+        mHeight = mWidth;
+        mCenterX = mWidth / 2;
+        mCenterY = mHeight / 2;
     }
 
     @Override
@@ -96,7 +99,7 @@ public class RadarChart extends View {
 
             mPaint.setColor(Color.parseColor(mListColor.get(2)));
             mPaint.getTextBounds(mListPoint.get(2).getLabel(), 0, mListPoint.get(2).getLabel().length(), bounds);
-            tempCanvas.drawText(mListPoint.get(2).getLabel(), mWidth - bounds.width() - mListPoint.get(2).getPullLabel(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight), mPaint);
+            tempCanvas.drawText(mListPoint.get(2).getLabel(), mWidth - bounds.width() - mListPoint.get(2).getPullLabel(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
 
             mPaint.setColor(Color.parseColor(mListColor.get(3)));
             mPaint.getTextBounds(mListPoint.get(3).getLabel(), 0, mListPoint.get(3).getLabel().length(), bounds);
@@ -104,7 +107,7 @@ public class RadarChart extends View {
 
             mPaint.setColor(Color.parseColor(mListColor.get(4)));
             mPaint.getTextBounds(mListPoint.get(4).getLabel(), 0, mListPoint.get(4).getLabel().length(), bounds);
-            tempCanvas.drawText(mListPoint.get(4).getLabel(), mListPoint.get(4).getPullLabel(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight), mPaint);
+            tempCanvas.drawText(mListPoint.get(4).getLabel(), mListPoint.get(4).getPullLabel(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
 
             mPaint.setColor(Color.parseColor(mListColor.get(5)));
             mPaint.getTextBounds(mListPoint.get(5).getLabel(), 0, mListPoint.get(5).getLabel().length(), bounds);
@@ -131,11 +134,11 @@ public class RadarChart extends View {
 
             mPaint.getTextBounds(String.valueOf(mListPoint.get(2).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(2).getPoint()).length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(2).getPoint()), mWidth - bounds.width() - mListPoint.get(2).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
+            tempCanvas.drawText(String.valueOf(mListPoint.get(2).getPoint()), mWidth - bounds.width() - mListPoint.get(2).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             int onlyPoint2 = bounds.width();
             mPaint.getTextBounds(String.valueOf(mListPoint.get(2).getPoint()), 0, String.valueOf(mListPoint.get(2).getPoint()).length(), bounds);
-            tempCanvas.drawText("pt", mWidth - onlyPoint2 - mListPoint.get(1).getPullPoint() + bounds.width() + 5, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
+            tempCanvas.drawText("pt", mWidth - onlyPoint2 - mListPoint.get(2).getPullPoint() + bounds.width() + 5, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
 
             mPaint.getTextBounds(String.valueOf(mListPoint.get(3).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(3).getPoint()).length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
@@ -147,10 +150,10 @@ public class RadarChart extends View {
 
             mPaint.getTextBounds(String.valueOf(mListPoint.get(4).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(4).getPoint()).length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(4).getPoint()), mListPoint.get(4).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
+            tempCanvas.drawText(String.valueOf(mListPoint.get(4).getPoint()), mListPoint.get(4).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             mPaint.getTextBounds(String.valueOf(mListPoint.get(4).getPoint()), 0, String.valueOf(mListPoint.get(4).getPoint()).length(), bounds);
-            tempCanvas.drawText("pt", mListPoint.get(4).getPullPoint() + bounds.width() + 10, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))), mPaint);
+            tempCanvas.drawText("pt", mListPoint.get(4).getPullPoint() + bounds.width() + 10, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
 
             mPaint.getTextBounds(String.valueOf(mListPoint.get(5).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(5).getPoint()).length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
@@ -160,22 +163,20 @@ public class RadarChart extends View {
             tempCanvas.drawText("pt", mListPoint.get(5).getPullPoint() + bounds.width() + 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
 
             mPaint.setColor(Color.parseColor("#969696"));
-            mPaint.setStrokeWidth(1);
-            tempCanvas.rotate(-150, mCenterX, mCenterY);
-            for (int i = 0; i < 6; i++) {
-                tempCanvas.rotate(60, mCenterX, mCenterY);
-                tempCanvas.drawLine(mCenterX, mCenterY, mCenterX + mRadius - mPadding / 2, mCenterY, mPaint);
-            }
+            mPaint.setStrokeWidth(2);
 
-            tempCanvas.rotate(90, mCenterX, mCenterY);
             for (int i = 0; i < 6; i++) {
+                mPaint.setStrokeWidth(2);
                 tempCanvas.rotate(60, mCenterX, mCenterY);
+                tempCanvas.drawLine(mCenterX, mCenterY, mCenterX, mCenterY - mRadius, mPaint);
                 for (int j = 1; j <= 10; j++) {
-                    if (j % 5 == 0)
+                    if (j % 5 == 0) {
+                        mPaint.setStrokeWidth(4);
+                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius, mCenterX + 10, mCenterY - mRadius, mPaint);
+                    } else {
                         mPaint.setStrokeWidth(2);
-                    else
-                        mPaint.setStrokeWidth(1);
-                    tempCanvas.drawLine(j % 5 == 0 ? mCenterX - 8 : mCenterX - 3, mCenterY - mRadius / 10 * j, j % 5 == 0 ? mCenterX + 8 : mCenterX + 3, mCenterY - mRadius / 10 * j, mPaint);
+                        tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j, mCenterX + 5, mCenterY - mRadius / 10 * j, mPaint);
+                    }
                 }
             }
             mPaint.setStrokeWidth(1);
@@ -185,8 +186,8 @@ public class RadarChart extends View {
             for (int i = 0; i < 6; i++) {
                 mPaint.setColor(Color.parseColor(mListColor.get(i)));
 
-                float xA = (mCenterX - mCenterX) * (float) Math.cos(Math.toRadians(i * 60)) - (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint + mPadding / 2 - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
-                float yA = (mCenterX - mCenterX) * (float) Math.sin(Math.toRadians(i * 60)) + (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint + mPadding / 2 - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
+                float xA = -(mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
+                float yA = (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
 
                 mListPolygonPoint[i] = new Point(xA, yA);
             }
@@ -195,7 +196,6 @@ public class RadarChart extends View {
             canvas.drawBitmap(bitmap, 0, 0, null);
             canvas.restore();
 
-//            Toast.makeText(getContext(), mListPoint.get(1).getPullPoint() + "..." + mListPoint.get(1).getPullLabel(), Toast.LENGTH_SHORT).show();
 
             Bitmap bitmap2 = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas2 = new Canvas(bitmap2);
@@ -214,8 +214,8 @@ public class RadarChart extends View {
             tempCanvas3.drawBitmap(mask, 0, 0, paint);
             paint.setXfermode(null);
 
-            mPaint.setColor(Color.argb(40, 0, 0, 0));
-            mPaint.setStrokeWidth(8);
+            mPaint.setColor(Color.argb(20, 0, 0, 0));
+            mPaint.setStrokeWidth(6);
             for (int i = 1; i < mListPolygonPoint.length; i++) {
                 tempCanvas3.drawLine(mListPolygonPoint[i - 1].x, mListPolygonPoint[i - 1].y, mListPolygonPoint[i].x, mListPolygonPoint[i].y, mPaint);
             }
@@ -227,47 +227,23 @@ public class RadarChart extends View {
 
             for (int i = 0; i < 6; i++) {
                 mPaint.setColor(Color.parseColor(mListColor.get(i)));
-                float xA = (mCenterX - mCenterX) * (float) Math.cos(Math.toRadians(i * 60)) - (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint + mPadding / 2 - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
-                float yA = (mCenterX - mCenterX) * (float) Math.sin(Math.toRadians(i * 60)) + (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint + mPadding / 2 - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
+                float xA = -(mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
+                float yA = (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
                 tempCanvas3.drawCircle(xA, yA, mWidth / 105, mPaint);
             }
+        }else{
+            Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+            Canvas tempCanvas = new Canvas(bitmap);
+
+            mPaint.setTextSize(mWidth / 15f);
+            int xPos = (mCenterX - (int) mPaint.measureText(String.valueOf("No data")) / 2);
+            int yPos = (int) (mCenterY - ((mPaint.descent() + mPaint.ascent()) / 2));
+            tempCanvas.drawText(String.valueOf("No data"), xPos, yPos, mPaint);
+
+            canvas.save();
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            canvas.restore();
         }
-    }
-
-    private void setOnMeasureCallback() {
-        ViewTreeObserver vto = getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                removeOnGlobalLayoutListener(this);
-                mWidth = getMeasuredWidth();
-                mHeight = mWidth;
-                mCenterX = mWidth / 2;
-                mCenterY = mHeight / 2;
-            }
-        });
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void removeOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener listener) {
-        if (Build.VERSION.SDK_INT < 16) {
-            getViewTreeObserver().removeGlobalOnLayoutListener(listener);
-        } else {
-            getViewTreeObserver().removeOnGlobalLayoutListener(listener);
-        }
-    }
-
-    public int converDpToPixel(int pDp) {
-        Resources r = getResources();
-        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, pDp, r.getDisplayMetrics());
-        return px;
-    }
-
-    public float convertPixelsToDp(float px) {
-        Resources resources = getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        float dp = px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return dp;
     }
 
     class Point {
@@ -282,19 +258,16 @@ public class RadarChart extends View {
     }
 
     private void drawPoly(Canvas canvas, int color, Point[] points) {
-        // line at minimum...
         if (points.length < 2) {
             return;
         }
 
-        // paint
         Paint polyPaint = new Paint();
         polyPaint.setAntiAlias(true);
         polyPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));
         polyPaint.setColor(color);
         polyPaint.setStyle(Paint.Style.FILL);
 
-        // path
         Path polyPath = new Path();
         polyPath.moveTo(points[0].x, points[0].y);
         int i, len;
@@ -304,11 +277,10 @@ public class RadarChart extends View {
         }
         polyPath.lineTo(points[0].x, points[0].y);
 
-        // draw
         canvas.drawPath(polyPath, polyPaint);
     }
 
-    public void setListPoint(ArrayList<PointLabel> pListPointLabel){
+    public void setListPoint(ArrayList<PointLabel> pListPointLabel) {
         this.mListPointTemp = pListPointLabel;
         this.invalidate();
     }
