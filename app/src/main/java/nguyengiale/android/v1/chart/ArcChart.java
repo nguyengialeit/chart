@@ -39,6 +39,8 @@ public class ArcChart extends View {
         try {
             mPoint = Float.parseFloat(a.getString(R.styleable.poitChartElement_point));
             mPoint = (float) Math.round(mPoint * 100) / 100;
+            if(mPoint > 10)
+                mPoint = 10;
         } catch (Exception e) {
             mPoint = 0;
         }
@@ -278,7 +280,10 @@ public class ArcChart extends View {
     }
 
     public void setPoint(float pPoint) {
-        this.mPoint = pPoint;
+        if(mPoint > 10)
+            this.mPoint = 10;
+        else
+            this.mPoint = pPoint;
         this.invalidate();
     }
 

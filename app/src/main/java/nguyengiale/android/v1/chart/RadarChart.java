@@ -74,6 +74,8 @@ public class RadarChart extends View {
                 if (mListPoint.get(i).getPoint() > mMaxPoint)
                     mMaxPoint = mListPoint.get(i).getPoint();
             }
+            if (mMaxPoint == 0)
+                mMaxPoint = 1;
 
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
@@ -231,7 +233,7 @@ public class RadarChart extends View {
                 float yA = (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
                 tempCanvas3.drawCircle(xA, yA, mWidth / 105, mPaint);
             }
-        }else{
+        } else {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
 
