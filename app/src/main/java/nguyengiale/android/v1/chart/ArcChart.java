@@ -25,7 +25,7 @@ public class ArcChart extends View {
     private int mWidth, mHeight;
     private int mCenterX, mCenterY;
     private int mPadding;
-    private float mPoint;
+    private float mPoint, mRealPoint;
     private float mRadiusChart, mRadiusLine, mMinusRadius;
     private int mLineWidth, mChartWidth;
     private float mDrawableWidth, mDrawableRatio;
@@ -39,6 +39,7 @@ public class ArcChart extends View {
         try {
             mPoint = Float.parseFloat(a.getString(R.styleable.poitChartElement_point));
             mPoint = (float) Math.round(mPoint * 100) / 100;
+            mRealPoint = mPoint;
             if(mPoint > 10)
                 mPoint = 10;
         } catch (Exception e) {
@@ -267,7 +268,7 @@ public class ArcChart extends View {
         mPaint.setTextSize(mWidth / 5f);
         int xPos = (mCenterX - (int) mPaint.measureText(String.valueOf(mPoint)) / 2);
         int yPos = (int) (mCenterY - ((mPaint.descent() + mPaint.ascent()) / 2));
-        mTempCanvas.drawText(String.valueOf(mPoint), xPos, yPos, mPaint);
+        mTempCanvas.drawText(String.valueOf(mRealPoint), xPos, yPos, mPaint);
 
         mPaint.setTextSize(mWidth / 15f);
         mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -280,7 +281,8 @@ public class ArcChart extends View {
     }
 
     public void setPoint(float pPoint) {
-        if(mPoint > 10)
+        mRealPoint = pPoint;
+        if(pPoint > 10)
             this.mPoint = 10;
         else
             this.mPoint = pPoint;
