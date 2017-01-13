@@ -216,7 +216,7 @@ public class RadarChart extends View {
             tempCanvas3.drawBitmap(mask, 0, 0, paint);
             paint.setXfermode(null);
 
-            mPaint.setColor(Color.argb(50, 0, 0, 0));
+            mPaint.setColor(Color.argb(10, 0, 0, 0));
             mPaint.setStrokeWidth(6);
             for (int i = 1; i < mListPolygonPoint.length; i++) {
                 tempCanvas3.drawLine(mListPolygonPoint[i - 1].x, mListPolygonPoint[i - 1].y, mListPolygonPoint[i].x, mListPolygonPoint[i].y, mPaint);
