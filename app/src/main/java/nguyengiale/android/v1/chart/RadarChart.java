@@ -174,7 +174,7 @@ public class RadarChart extends View {
                 for (int j = 1; j <= 10; j++) {
                     if (j % 5 == 0) {
                         mPaint.setStrokeWidth(4);
-                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius, mCenterX + 10, mCenterY - mRadius, mPaint);
+                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius / 10 * j, mCenterX + 10, mCenterY - mRadius / 10 * j, mPaint);
                     } else {
                         mPaint.setStrokeWidth(2);
                         tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j, mCenterX + 5, mCenterY - mRadius / 10 * j, mPaint);
