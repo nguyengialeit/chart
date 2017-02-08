@@ -174,10 +174,10 @@ public class RadarChart extends View {
                 for (int j = 1; j <= 10; j++) {
                     if (j % 5 == 0) {
                         mPaint.setStrokeWidth(3);
-                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius / 10 * j - 1.5f * j, mCenterX + 10, mCenterY - mRadius / 10 * j - 1.5f * j, mPaint);
+                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius / 10 * j - 1.5f * ( j - 1), mCenterX + 10, mCenterY - mRadius / 10 * j - 1.5f * ( j - 1), mPaint);
                     } else {
                         mPaint.setStrokeWidth(1.5f);
-                        tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j - 1.5f * j, mCenterX + 5, mCenterY - mRadius / 10 * j - 1.5f * j, mPaint);
+                        tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j - 1.5f * ( j - 1), mCenterX + 5, mCenterY - mRadius / 10 * j - 1.5f * ( j - 1), mPaint);
                     }
                 }
             }
