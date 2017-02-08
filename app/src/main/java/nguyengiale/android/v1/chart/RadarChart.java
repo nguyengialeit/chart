@@ -26,9 +26,9 @@ import nguyengiale.android.v1.chart.object.PointLabel;
 public class RadarChart extends View {
     private final Paint mPaint;
     private int mWidth, mHeight;
-    private int mCenterX, mCenterY;
+    private float mCenterX, mCenterY;
     private ArrayList<String> mListColor = new ArrayList<>();
-    private int mRadius, mTitleHeight, mPointHeight, mPadding;
+    private float mRadius, mTitleHeight, mPointHeight, mPadding;
     private ArrayList<PointLabel> mListPoint = new ArrayList<>();
     private ArrayList<PointLabel> mListPointTemp = new ArrayList<>();
     private int mMaxPoint;
@@ -241,8 +241,8 @@ public class RadarChart extends View {
             Canvas tempCanvas = new Canvas(bitmap);
 
             mPaint.setTextSize(mWidth / 15f);
-            int xPos = (mCenterX - (int) mPaint.measureText(String.valueOf("No data")) / 2);
-            int yPos = (int) (mCenterY - ((mPaint.descent() + mPaint.ascent()) / 2));
+            float xPos = (mCenterX - (int) mPaint.measureText(String.valueOf("No data")) / 2);
+            float yPos = (int) (mCenterY - ((mPaint.descent() + mPaint.ascent()) / 2));
             tempCanvas.drawText(String.valueOf("No data"), xPos, yPos, mPaint);
 
             canvas.save();
