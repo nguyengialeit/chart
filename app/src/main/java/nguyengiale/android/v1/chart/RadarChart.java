@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -29,10 +30,12 @@ public class RadarChart extends View {
     private float mCenterX, mCenterY;
     private ArrayList<String> mListColor = new ArrayList<>();
     private float mRadius, mTitleHeight, mPointHeight, mPadding;
+    private ArrayList<Integer> mListOldPoint = new ArrayList<>();
     private ArrayList<PointLabel> mListPoint = new ArrayList<>();
     private ArrayList<PointLabel> mListPointTemp = new ArrayList<>();
     private int mMaxPoint;
     private Point[] mListPolygonPoint = new Point[6];
+    private Point[] mListPolygonOldPoint = new Point[6];
 
     public RadarChart(final Context context, final AttributeSet attrs) {
         super(context, attrs);
@@ -74,6 +77,11 @@ public class RadarChart extends View {
                 if (mListPoint.get(i).getPoint() > mMaxPoint)
                     mMaxPoint = mListPoint.get(i).getPoint();
             }
+            if (!mListOldPoint.isEmpty())
+                for (int i = 0; i < mListOldPoint.size(); i++) {
+                    if (mListOldPoint.get(i) > mMaxPoint)
+                        mMaxPoint = mListOldPoint.get(i);
+                }
             if (mMaxPoint == 0)
                 mMaxPoint = 1;
 
@@ -172,12 +180,9 @@ public class RadarChart extends View {
                 tempCanvas.rotate(60, mCenterX, mCenterY);
                 tempCanvas.drawLine(mCenterX, mCenterY, mCenterX, mCenterY - mRadius, mPaint);
                 for (int j = 1; j <= 10; j++) {
-                    if (j == 5) {
+                    if (j % 5 == 0) {
                         mPaint.setStrokeWidth(3);
-                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius / 2, mCenterX + 10, mCenterY - mRadius / 2, mPaint);
-                    }else if (j == 10) {
-                        mPaint.setStrokeWidth(3);
-                        tempCanvas.drawLine(mCenterX - 10, mCenterY - mRadius, mCenterX + 10, mCenterY - mRadius, mPaint);
+                        tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j, mCenterX + 5, mCenterY - mRadius / 10 * j, mPaint);
                     } else {
                         mPaint.setStrokeWidth(1.5f);
                         tempCanvas.drawLine(mCenterX - 5, mCenterY - mRadius / 10 * j, mCenterX + 5, mCenterY - mRadius / 10 * j, mPaint);
@@ -188,7 +193,20 @@ public class RadarChart extends View {
 
             tempCanvas.rotate(60, mCenterX, mCenterY);
 
-            for (int i = 0; i < 6; i++) {
+            if (!mListOldPoint.isEmpty())
+                for (int i = 0; i < 6; i++) {
+                    mPaint.setColor(Color.parseColor(mListColor.get(i)));
+
+                    float xA = -(mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
+                    float yA = (mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
+
+                    float xB = -(mCenterY - mRadius * mListOldPoint.get(i) / mMaxPoint - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
+                    float yB = (mCenterY - mRadius * mListOldPoint.get(i) / mMaxPoint - mCenterY) * (float) Math.cos(Math.toRadians(i * 60)) + mCenterY;
+
+                    mListPolygonPoint[i] = new Point(xA, yA);
+                    mListPolygonOldPoint[i] = new Point(xB, yB);
+                }
+            else for (int i = 0; i < 6; i++) {
                 mPaint.setColor(Color.parseColor(mListColor.get(i)));
 
                 float xA = -(mCenterY - mRadius * mListPoint.get(i).getPoint() / mMaxPoint - mCenterY) * (float) Math.sin(Math.toRadians(i * 60)) + mCenterX;
@@ -225,6 +243,17 @@ public class RadarChart extends View {
                 tempCanvas3.drawLine(mListPolygonPoint[i - 1].x, mListPolygonPoint[i - 1].y, mListPolygonPoint[i].x, mListPolygonPoint[i].y, mPaint);
             }
             tempCanvas3.drawLine(mListPolygonPoint[0].x, mListPolygonPoint[0].y, mListPolygonPoint[5].x, mListPolygonPoint[5].y, mPaint);
+
+            if (!mListOldPoint.isEmpty()) {
+                mPaint.setColor(Color.parseColor("#707070"));
+                mPaint.setStrokeWidth(3);
+                mPaint.setPathEffect(new DashPathEffect(new float[]{15,10}, 0));
+                for (int i = 1; i < mListPolygonOldPoint.length; i++) {
+                    tempCanvas3.drawLine(mListPolygonOldPoint[i - 1].x, mListPolygonOldPoint[i - 1].y, mListPolygonOldPoint[i].x, mListPolygonOldPoint[i].y, mPaint);
+                }
+                tempCanvas3.drawLine(mListPolygonOldPoint[0].x, mListPolygonOldPoint[0].y, mListPolygonOldPoint[5].x, mListPolygonOldPoint[5].y, mPaint);
+            }
+
             mPaint.setStrokeWidth(1);
             canvas.save();
             canvas.drawBitmap(result, 0, 0, null);
@@ -287,6 +316,11 @@ public class RadarChart extends View {
 
     public void setListPoint(ArrayList<PointLabel> pListPointLabel) {
         this.mListPointTemp = pListPointLabel;
+        this.invalidate();
+    }
+
+    public void setListOldPoint(ArrayList<Integer> pListPointLabel) {
+        this.mListOldPoint = pListPointLabel;
         this.invalidate();
     }
 }
