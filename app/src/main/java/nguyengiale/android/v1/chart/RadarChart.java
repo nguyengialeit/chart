@@ -85,6 +85,16 @@ public class RadarChart extends View {
             if (mMaxPoint == 0)
                 mMaxPoint = 1;
 
+            for (int i = 0; i < mListPoint.size(); i++) {
+                if (mListPoint.get(i).getPoint() == 0)
+                    mListPoint.get(i).setPoint((int) (mMaxPoint * 0.1));
+            }
+            if (!mListOldPoint.isEmpty())
+                for (int i = 0; i < mListOldPoint.size(); i++) {
+                    if (mListOldPoint.get(i) == 0)
+                        mListOldPoint.set(i, ((int) (mMaxPoint * 0.1)));
+                }
+
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
             Rect bounds = new Rect();
@@ -126,50 +136,50 @@ public class RadarChart extends View {
             mPaint.setTextSize(mWidth / 20f);
             mPaint.setColor(Color.parseColor("#000000"));
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(0).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(0).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(0).getPointLabel() + "pt", 0, mListPoint.get(0).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(0).getPoint()), mWidth / 2 - bounds.width() / 2, mTitleHeight + mPointHeight, mPaint);
+            tempCanvas.drawText(mListPoint.get(0).getPointLabel(), mWidth / 2 - bounds.width() / 2, mTitleHeight + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             int onlyPoint0 = bounds.width() / 2;
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(0).getPoint()), 0, String.valueOf(mListPoint.get(0).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(0).getPointLabel(), 0, mListPoint.get(0).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mWidth / 2 - onlyPoint0 + bounds.width() + 10, mTitleHeight + mPointHeight, mPaint);
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(1).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(1).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(1).getPointLabel() + "pt", 0, mListPoint.get(1).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(1).getPoint()), mWidth - bounds.width() - mListPoint.get(1).getPullPoint() - 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
+            tempCanvas.drawText(mListPoint.get(1).getPointLabel(), mWidth - bounds.width() - mListPoint.get(1).getPullPoint() - 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             int onlyPoint1 = bounds.width();
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(1).getPoint()), 0, String.valueOf(mListPoint.get(1).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(1).getPointLabel(), 0, mListPoint.get(1).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mWidth - onlyPoint1 - mListPoint.get(1).getPullPoint() + bounds.width(), mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(2).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(2).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(2).getPointLabel() + "pt", 0, mListPoint.get(2).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(2).getPoint()), mWidth - bounds.width() - mListPoint.get(2).getPullPoint() - 10, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
+            tempCanvas.drawText(mListPoint.get(2).getPointLabel(), mWidth - bounds.width() - mListPoint.get(2).getPullPoint() - 10, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             int onlyPoint2 = bounds.width();
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(2).getPoint()), 0, String.valueOf(mListPoint.get(2).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(2).getPointLabel(), 0, mListPoint.get(2).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mWidth - onlyPoint2 - mListPoint.get(2).getPullPoint() + bounds.width(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(3).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(3).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(3).getPointLabel() + "pt", 0, mListPoint.get(3).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(3).getPoint()), mWidth / 2 - bounds.width() / 2, mHeight - 10, mPaint);
+            tempCanvas.drawText(mListPoint.get(3).getPointLabel(), mWidth / 2 - bounds.width() / 2, mHeight - 10, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             int onlyPoint3 = bounds.width() / 2;
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(3).getPoint()), 0, String.valueOf(mListPoint.get(3).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(3).getPointLabel(), 0, mListPoint.get(3).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mWidth / 2 - onlyPoint3 + bounds.width() + 10, mHeight - 10, mPaint);
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(4).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(4).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(4).getPointLabel() + "pt", 0, mListPoint.get(4).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(4).getPoint()), mListPoint.get(4).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
+            tempCanvas.drawText(mListPoint.get(4).getPointLabel(), mListPoint.get(4).getPullPoint(), mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(4).getPoint()), 0, String.valueOf(mListPoint.get(4).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(4).getPointLabel(), 0, mListPoint.get(4).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mListPoint.get(4).getPullPoint() + bounds.width() + 10, mHeight - (mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60))) + mPointHeight, mPaint);
 
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(5).getPoint()) + "pt", 0, String.valueOf(mListPoint.get(5).getPoint()).length() + 2, bounds);
+            mPaint.getTextBounds(mListPoint.get(5).getPointLabel() + "pt", 0, mListPoint.get(5).getPointLabel().length() + 2, bounds);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            tempCanvas.drawText(String.valueOf(mListPoint.get(5).getPoint()), mListPoint.get(5).getPullPoint(), mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
+            tempCanvas.drawText(mListPoint.get(5).getPointLabel(), mListPoint.get(5).getPullPoint(), mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-            mPaint.getTextBounds(String.valueOf(mListPoint.get(5).getPoint()), 0, String.valueOf(mListPoint.get(5).getPoint()).length(), bounds);
+            mPaint.getTextBounds(mListPoint.get(5).getPointLabel(), 0, mListPoint.get(5).getPointLabel().length(), bounds);
             tempCanvas.drawText("pt", mListPoint.get(5).getPullPoint() + bounds.width() + 10, mPadding + mRadius - mRadius * (float) Math.cos(Math.toRadians(60)) + mPointHeight, mPaint);
 
             mPaint.setColor(Color.parseColor("#969696"));
@@ -247,7 +257,7 @@ public class RadarChart extends View {
             if (!mListOldPoint.isEmpty()) {
                 mPaint.setColor(Color.parseColor("#707070"));
                 mPaint.setStrokeWidth(3);
-                mPaint.setPathEffect(new DashPathEffect(new float[]{15,10}, 0));
+                mPaint.setPathEffect(new DashPathEffect(new float[]{15, 10}, 0));
                 for (int i = 1; i < mListPolygonOldPoint.length; i++) {
                     tempCanvas3.drawLine(mListPolygonOldPoint[i - 1].x, mListPolygonOldPoint[i - 1].y, mListPolygonOldPoint[i].x, mListPolygonOldPoint[i].y, mPaint);
                 }
