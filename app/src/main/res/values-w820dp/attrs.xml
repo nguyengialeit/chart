@@ -3,4 +3,8 @@
     <declare-styleable name="poitChartElement">
         <attr name="point" format="string"/>
     </declare-styleable>
+    <declare-styleable name="pieChartElement">
+        <attr name="percentage" format="float"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
 </resources>
