@@ -157,7 +157,7 @@ public class LineChartItem extends View {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight + mLabelHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
 
-            mPaint.setColor(Color.parseColor("#f8514f"));
+            mPaint.setColor(Color.parseColor(mColor));
             mPaint.setStrokeWidth(3);
             mPaint.setPathEffect(null);
             if (mStartPoint != 0)
