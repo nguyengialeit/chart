@@ -185,7 +185,6 @@ public class LineChart extends RelativeLayout {
 
     public void setmDate(String mDate) {
         this.mDate = mDate;
-        isFirst = false;
         invalidate();
     }
 
@@ -317,6 +316,7 @@ public class LineChart extends RelativeLayout {
                     snapHelper.attachToRecyclerView(mSnappingRecyclerView);
                     addView(mSnappingRecyclerView);
                     mSnappingRecyclerView.setAdapter(new lineChartAdapter());
+                    isFirst = false;
                 }
             } else {
                 Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
