@@ -7,6 +7,6 @@
 
     <nguyengiale.android.v1.chart.LineChartItem
         android:id="@+id/lineChart"
-        android:layout_width="70dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"/>
 </LinearLayout>

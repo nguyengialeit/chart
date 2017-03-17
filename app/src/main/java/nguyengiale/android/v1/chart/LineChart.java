@@ -113,20 +113,20 @@ public class LineChart extends RelativeLayout {
 
             if (color.equals("")) {
                 mPaint.setColor(Color.parseColor("#000000"));
-                mPaint.setTextSize(mWidth / 17f);
+                mPaint.setTextSize(mWidth / 20f);
                 SplitDate date = CommonClass.splitDate(mDate);
 
                 mPaint.getTextBounds(date.getYear() + "年" + date.getMonth() + "月" + date.getDay() + "日", 0, String.valueOf(date.getYear() + "年" + date.getMonth() + "月" + date.getDay() + "日").length(), bounds);
-                mDateHeight = bounds.height() + 20;
+                mDateHeight = bounds.height() + 40;
                 tempCanvas.drawText(date.getYear() + "年" + date.getMonth() + "月" + date.getDay() + "日", mWidth / 2 - bounds.width() / 2, mDateHeight - 20, mPaint);
 
-                mPaint.setTextSize(mWidth / 9f);
+                mPaint.setTextSize(mWidth / 10f);
                 mPaint.getTextBounds(mPoint, 0, mPoint.length(), bounds);
                 mPointHeight = bounds.height();
-                tempCanvas.drawText(mPoint, mWidth / 2 - bounds.width() / 2, mDateHeight + mPointHeight, mPaint);
-                mPaint.setTextSize(mWidth / 22f);
+                tempCanvas.drawText(mPoint, mWidth / 2 - bounds.width() / 2, mDateHeight + mPointHeight + 10, mPaint);
+                mPaint.setTextSize(mWidth / 25f);
 
-                tempCanvas.drawText("pt", mWidth / 2 + bounds.width() / 2 + 20, mDateHeight + mPointHeight, mPaint);
+                tempCanvas.drawText("pt", mWidth / 2 + bounds.width() / 2 + 20, mDateHeight + mPointHeight + 10, mPaint);
 
                 Bitmap d = null;
                 if (Float.parseFloat(mPoint) >= 5)
@@ -136,25 +136,27 @@ public class LineChart extends RelativeLayout {
                 else
                     d = BitmapFactory.decodeResource(getResources(), R.drawable.ico_company_status_2_big);
 
+                d = Bitmap.createScaledBitmap(d, (int) (d.getWidth() * (mPointHeight + 10) / d.getHeight()), (int) mPointHeight + 10, true);
                 int mDrawableWidth = d.getWidth();
                 int mDrawableHeight = d.getHeight();
-                canvas.drawBitmap(d, mWidth / 2 - bounds.width() / 2 - mDrawableWidth - 20, mDateHeight + mPointHeight - mDrawableHeight + 10, null);
+
+                canvas.drawBitmap(d, mWidth / 2 - bounds.width() / 2 - mDrawableWidth, mDateHeight + mPointHeight - mDrawableHeight + 10, null);
             } else {
                 mPaint.setColor(Color.parseColor("#000000"));
-                mPaint.setTextSize(mWidth / 17f);
+                mPaint.setTextSize(mWidth / 20f);
                 SplitDate date = CommonClass.splitDate(mDate);
 
                 mPaint.getTextBounds(date.getYear() + "年" + date.getMonth() + "月", 0, String.valueOf(date.getYear() + "年" + date.getMonth() + "月").length(), bounds);
                 mDateHeight = bounds.height() + 20;
                 tempCanvas.drawText(date.getYear() + "年" + date.getMonth() + "月", mWidth / 2 - bounds.width() / 2, mDateHeight - 20, mPaint);
 
-                mPaint.setTextSize(mWidth / 9f);
+                mPaint.setTextSize(mWidth / 12f);
                 mPaint.getTextBounds(String.valueOf((int) Float.parseFloat(mPoint)), 0, String.valueOf((int) Float.parseFloat(mPoint)).length(), bounds);
                 mPointHeight = bounds.height();
-                tempCanvas.drawText(String.valueOf((int) Float.parseFloat(mPoint)), mWidth / 2 - bounds.width() / 2, mDateHeight + mPointHeight, mPaint);
-                mPaint.setTextSize(mWidth / 22f);
+                tempCanvas.drawText(String.valueOf((int) Float.parseFloat(mPoint)), mWidth / 2 - bounds.width() / 2, mDateHeight + mPointHeight + 10, mPaint);
+                mPaint.setTextSize(mWidth / 25f);
 
-                tempCanvas.drawText("位", mWidth / 2 + bounds.width() / 2 + 20, mDateHeight + mPointHeight, mPaint);
+                tempCanvas.drawText("位", mWidth / 2 + bounds.width() / 2 + 10, mDateHeight + mPointHeight + 10, mPaint);
             }
 
             canvas.save();
@@ -227,85 +229,86 @@ public class LineChart extends RelativeLayout {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            if (mListData.size() > 0) {
+            if (isFirst) {
+                if (mListData.size() > 0) {
 
-                if (isFirst) {
-                    mDate = mListData.get(0).getLabel();
-                    mPoint = String.valueOf(mListData.get(0).getPoint());
-                }
-                if (color.equals("")) {
-                    mMaxPoint = mListData.get(0).getPoint();
-                    for (int i = 0; i < mListData.size(); i++) {
-                        if (mListData.get(i).getPoint() > mMaxPoint)
-                            mMaxPoint = mListData.get(i).getPoint();
+                    if (isFirst) {
+                        mDate = mListData.get(0).getLabel();
+                        mPoint = String.valueOf(mListData.get(0).getPoint());
                     }
-                    if (mMaxPoint % 2 == 1) {
-                        mMaxPoint = mMaxPoint + 1;
-                    }
-                } else {
-                    mMaxPoint = 50;
-                }
-
-
-                //Draw date
-                Rect bounds = new Rect();
-                mPaint.setTextSize(mWidth / 17f);
-                mPaint.getTextBounds(mDate, 0, mDate.length(), bounds);
-                mDateHeight = bounds.height() + 20;
-                mPaint.setTextSize(mWidth / 9f);
-                mPaint.getTextBounds(mPoint, 0, mPoint.length(), bounds);
-                mPointHeight = bounds.height();
-
-                Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
-                Canvas tempCanvas = new Canvas(bitmap);
-                mPaint.setTextSize(mWidth / 22f);
-                mPaint.getTextBounds(String.valueOf(mMaxPoint), 0, String.valueOf(mMaxPoint).length(), bounds);
-                mLabelHeight = bounds.height() * 3;
-                mLabelSize = mPaint.getTextSize();
-                mTopChart = mDateHeight + mPointHeight + 40;
-                mBottomChart = mHeight - mLabelHeight;
-                mLeftChart = bounds.width();
-                mEachUnitHeight = bounds.height();
-
-                mEachUnit = mMaxPoint / mUnitLineNumber;
-                mEachUnitPixel = (mBottomChart - mTopChart) / mUnitLineNumber;
-
-                if (color.equals("")) {
-                    for (int i = 0; i <= mUnitLineNumber; i++) {
-                        mListUnit.add(Math.round(i * mEachUnit));
-                    }
-                } else {
-                    for (int i = mUnitLineNumber; i >= 0; i--) {
-                        if (Math.round(i * mEachUnit) == 0)
-                            mListUnit.add(1);
-                        else
-                            mListUnit.add(Math.round(i * mEachUnit));
-                    }
-                }
-
-                mPaint.setColor(Color.parseColor("#a6a6a6"));
-                mPaint.setStrokeWidth(2);
-
-                for (int i = 0; i < mListUnit.size(); i++) {
-                    if (i != 0) {
-                        mPaint.setPathEffect(new DashPathEffect(new float[]{3, 5}, 0));
-                        tempCanvas.drawLine(mLeftChart, mBottomChart - mEachUnitPixel * i, mWidth, mBottomChart - mEachUnitPixel * i, mPaint);
-
+                    if (color.equals("")) {
+                        mMaxPoint = mListData.get(0).getPoint();
+                        for (int i = 0; i < mListData.size(); i++) {
+                            if (mListData.get(i).getPoint() > mMaxPoint)
+                                mMaxPoint = mListData.get(i).getPoint();
+                        }
+                        if (mMaxPoint % 2 == 1) {
+                            mMaxPoint = mMaxPoint + 1;
+                        }
                     } else {
-                        mPaint.setPathEffect(null);
+                        mMaxPoint = 50;
                     }
 
-                    mPaint.getTextBounds(String.valueOf(mListUnit.get(i)), 0, String.valueOf(mListUnit.get(i)).length(), bounds);
-                    tempCanvas.drawText(String.valueOf(mListUnit.get(i)), (mLeftChart - bounds.width()) / 2, mBottomChart - mEachUnitPixel * i + mEachUnitHeight / 2, mPaint);
-                }
 
-                canvas.save();
-                canvas.drawBitmap(bitmap, 0, 0, null);
-                canvas.restore();
+                    //Draw date
+                    Rect bounds = new Rect();
+                    mPaint.setTextSize(mWidth / 20f);
+                    mPaint.getTextBounds(mDate, 0, mDate.length(), bounds);
+                    mDateHeight = bounds.height() + 40;
+                    mPaint.setTextSize(mWidth / 10f);
+                    mPaint.getTextBounds(mPoint, 0, mPoint.length(), bounds);
+                    mPointHeight = bounds.height();
 
-                if (isFirst) {
+                    Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+                    Canvas tempCanvas = new Canvas(bitmap);
+                    mPaint.setTextSize(mWidth / 25f);
+                    mPaint.getTextBounds(String.valueOf(mMaxPoint), 0, String.valueOf(mMaxPoint).length(), bounds);
+                    mLabelHeight = bounds.height() * 3;
+                    mLabelSize = mPaint.getTextSize();
+                    mTopChart = mDateHeight + mPointHeight + 40;
+                    mBottomChart = mHeight - mLabelHeight;
+                    mLeftChart = bounds.width();
+                    mEachUnitHeight = bounds.height();
+
+                    mEachUnit = mMaxPoint / mUnitLineNumber;
+                    mEachUnitPixel = (mBottomChart - mTopChart) / mUnitLineNumber;
+
+                    if (color.equals("")) {
+                        for (int i = 0; i <= mUnitLineNumber; i++) {
+                            mListUnit.add(Math.round(i * mEachUnit));
+                        }
+                    } else {
+                        for (int i = mUnitLineNumber; i >= 0; i--) {
+                            if (Math.round(i * mEachUnit) == 0)
+                                mListUnit.add(1);
+                            else
+                                mListUnit.add(Math.round(i * mEachUnit));
+                        }
+                    }
+
+                    mPaint.setColor(Color.parseColor("#a6a6a6"));
+                    mPaint.setStrokeWidth(2);
+
+                    for (int i = 0; i < mListUnit.size(); i++) {
+                        if (i != 0) {
+                            mPaint.setPathEffect(new DashPathEffect(new float[]{3, 5}, 0));
+                            tempCanvas.drawLine(mLeftChart, mBottomChart - mEachUnitPixel * i, mWidth, mBottomChart - mEachUnitPixel * i, mPaint);
+
+                        } else {
+                            mPaint.setPathEffect(null);
+                        }
+
+                        mPaint.getTextBounds(String.valueOf(mListUnit.get(i)), 0, String.valueOf(mListUnit.get(i)).length(), bounds);
+                        tempCanvas.drawText(String.valueOf(mListUnit.get(i)), (mLeftChart - bounds.width()) / 2, mBottomChart - mEachUnitPixel * i + mEachUnitHeight / 2, mPaint);
+                    }
+
+                    canvas.save();
+                    canvas.drawBitmap(bitmap, 0, 0, null);
+                    canvas.restore();
+
+
                     mSnappingRecyclerView = new RecyclerView(getContext());
-                    LayoutParams param = new LayoutParams((int) (mWidth - mLeftChart), (int) (mHeight - mTopChart));
+                    RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams((int) (mWidth - mLeftChart), (int) (mHeight - mTopChart));
                     param.addRule(ALIGN_PARENT_RIGHT);
                     param.addRule(ALIGN_PARENT_BOTTOM);
                     mSnappingRecyclerView.setLayoutParams(param);
@@ -317,19 +320,20 @@ public class LineChart extends RelativeLayout {
                     addView(mSnappingRecyclerView);
                     mSnappingRecyclerView.setAdapter(new lineChartAdapter());
                     isFirst = false;
+
+                } else {
+                    Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+                    Canvas tempCanvas = new Canvas(bitmap);
+
+                    mPaint.setTextSize(mWidth / 18f);
+                    float xPos = (mWidth / 2 - (int) mPaint.measureText(String.valueOf("No data")) / 2);
+                    float yPos = (int) (mHeight / 2 - ((mPaint.descent() + mPaint.ascent()) / 2));
+                    tempCanvas.drawText(String.valueOf("No data"), xPos, yPos, mPaint);
+
+                    canvas.save();
+                    canvas.drawBitmap(bitmap, 0, 0, null);
+                    canvas.restore();
                 }
-            } else {
-                Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
-                Canvas tempCanvas = new Canvas(bitmap);
-
-                mPaint.setTextSize(mWidth / 15f);
-                float xPos = (mWidth / 2 - (int) mPaint.measureText(String.valueOf("No data")) / 2);
-                float yPos = (int) (mHeight / 2 - ((mPaint.descent() + mPaint.ascent()) / 2));
-                tempCanvas.drawText(String.valueOf("No data"), xPos, yPos, mPaint);
-
-                canvas.save();
-                canvas.drawBitmap(bitmap, 0, 0, null);
-                canvas.restore();
             }
         }
     }
