@@ -9,13 +9,13 @@ import android.graphics.Rect;
 
 public class PointLabel {
     private String label, pointLabel;
-    private int point, pullLabel, pullPoint;
+    private float point, pullLabel, pullPoint;
     private float labelTextSize, pointTextSize;
-    public PointLabel(String label, int point){
+    public PointLabel(String label, float point){
         this.label = label;
         this.point = point;
     }
-    public PointLabel(String label, int point, float labelTextSize, float pointTextSize){
+    public PointLabel(String label, float point, float labelTextSize, float pointTextSize){
         this.label = label;
         this.point = point;
         this.pointLabel = String.valueOf(point);
@@ -30,7 +30,7 @@ public class PointLabel {
         this.label = label;
     }
 
-    public int getPoint() {
+    public float getPoint() {
         return point;
     }
 
