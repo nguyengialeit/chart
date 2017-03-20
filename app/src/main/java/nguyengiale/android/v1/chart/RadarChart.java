@@ -27,12 +27,13 @@ import nguyengiale.android.v1.chart.object.PointLabel;
  */
 
 public class RadarChart extends View {
-    private final Paint mPaint;
+    private Paint mPaint;
     private int mWidth, mHeight;
     private float mCenterX, mCenterY;
     private ArrayList<String> mListColor = new ArrayList<>();
     private float mRadius, mTitleHeight, mPointHeight, mPadding;
     private ArrayList<Float> mListOldPoint = new ArrayList<>();
+    private ArrayList<Float> mListOldPointTemp = new ArrayList<>();
     private ArrayList<PointLabel> mListPoint = new ArrayList<>();
     private ArrayList<PointLabel> mListPointTemp = new ArrayList<>();
     private float mMaxPoint;
@@ -40,12 +41,10 @@ public class RadarChart extends View {
     private Point[] mListPolygonOldPoint = new Point[6];
     private List<String> mListLabel = new ArrayList<>();
     private int mPaddingLabel = 20;
+    private boolean isFirst = true;
 
     public RadarChart(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
     }
 
     @Override
@@ -62,11 +61,16 @@ public class RadarChart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+
+        mListPoint.clear();
         for (int i = 0; i < mListPointTemp.size(); i++) {
             mListPoint.add(new PointLabel(mListPointTemp.get(i).getLabel(), mListPointTemp.get(i).getPoint(), mWidth / 22f, mWidth / 20f));
         }
 
         if (mListPoint.size() > 0) {
+            mListColor.clear();
             mListColor.add("#f73d54");
             mListColor.add("#ff6b99");
             mListColor.add("#6d5bc7");
@@ -265,6 +269,9 @@ public class RadarChart extends View {
                 tempCanvas3.drawLine(mListPolygonOldPoint[0].x, mListPolygonOldPoint[0].y, mListPolygonOldPoint[5].x, mListPolygonOldPoint[5].y, mPaint);
             }
 
+            mListOldPoint.clear();
+            mListOldPoint.addAll(mListOldPointTemp);
+
             mPaint.setStrokeWidth(1);
             canvas.save();
             canvas.drawBitmap(result, 0, 0, null);
@@ -281,6 +288,7 @@ public class RadarChart extends View {
                 canvas.drawBitmap(drawLabel(), 0, 0, null);
                 canvas.restore();
             }
+            isFirst = false;
         } else {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
@@ -484,12 +492,15 @@ public class RadarChart extends View {
     }
 
     public void setListPoint(ArrayList<PointLabel> pListPointLabel) {
+        mListPointTemp.clear();
         this.mListPointTemp = pListPointLabel;
         this.invalidate();
     }
 
     public void setListOldPoint(ArrayList<Float> pListPointLabel) {
+        mListOldPoint.clear();
         this.mListOldPoint = pListPointLabel;
+        this.mListOldPointTemp.addAll(pListPointLabel);
         this.invalidate();
     }
 
@@ -498,6 +509,7 @@ public class RadarChart extends View {
     }
 
     public void setmListLabel(List<String> mListLabel) {
+        mListLabel.clear();
         this.mListLabel = mListLabel;
         invalidate();
     }
