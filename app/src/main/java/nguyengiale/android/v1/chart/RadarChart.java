@@ -92,14 +92,20 @@ public class RadarChart extends View {
                 if (mListPoint.get(i).getPoint() == 0)
                     mListPoint.get(i).setPoint((int) (mMaxPoint * 0.1));
             }
-            if (!mListOldPoint.isEmpty())
+            if (!mListOldPoint.isEmpty()) {
+                float maxOldPoint = mListOldPoint.get(0);
+                for (int i = 0; i < mListOldPoint.size(); i++) {
+                    if (mListOldPoint.get(i) > maxOldPoint)
+                        maxOldPoint = mListOldPoint.get(i);
+                }
+
                 for (int i = 0; i < mListOldPoint.size(); i++) {
                     if (mListOldPoint.get(i) == 0)
                         mListOldPoint.set(i, (mMaxPoint * 0.1f));
                     else
-                        mListOldPoint.set(i, mListOldPoint.get(i) / 30 * mMaxPoint);
+                        mListOldPoint.set(i, mListOldPoint.get(i) / maxOldPoint * mMaxPoint);
                 }
-
+            }
 
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
