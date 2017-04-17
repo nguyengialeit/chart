@@ -514,9 +514,9 @@ public class RadarChart extends View {
         return mListLabel;
     }
 
-    public void setmListLabel(List<String> mListLabel) {
+    public void setmListLabel(List<String> pListLabel) {
         mListLabel.clear();
-        this.mListLabel = mListLabel;
+        mListLabel = pListLabel;
         invalidate();
     }
 }
