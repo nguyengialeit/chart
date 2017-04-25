@@ -25,7 +25,6 @@ import java.util.List;
 import nguyengiale.android.v1.chart.object.PointLabel;
 import nguyengiale.android.v1.chart.object.SplitDate;
 
-
 /**
  * Created by giale on 3/13/17.
  */
@@ -309,7 +308,7 @@ public class LineChart extends RelativeLayout {
 
                 if (isFirst) {
                     mSnappingRecyclerView = new RecyclerView(getContext());
-                    RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams((int) (mWidth - mLeftChart), (int) (mHeight - mTopChart));
+                    LayoutParams param = new LayoutParams((int) (mWidth - mLeftChart), (int) (mHeight - mTopChart));
                     param.addRule(ALIGN_PARENT_RIGHT);
                     param.addRule(ALIGN_PARENT_BOTTOM);
                     mSnappingRecyclerView.setLayoutParams(param);
