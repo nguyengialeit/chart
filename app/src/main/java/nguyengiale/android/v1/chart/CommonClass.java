@@ -16,8 +16,8 @@ public class CommonClass {
         if (date.contains("-")) {
             items = mDate.split("-");
             if (items.length == 2) {
-                month = Integer.parseInt(items[0]);
-                day = Integer.parseInt(items[1]);
+                year = Integer.parseInt(items[0]);
+                month = Integer.parseInt(items[1]);
             } else if (items.length == 3) {
                 year = Integer.parseInt(items[0]);
                 month = Integer.parseInt(items[1]);
@@ -26,8 +26,8 @@ public class CommonClass {
         } else if (date.contains("/")) {
             items = mDate.split("/");
             if (items.length == 2) {
-                month = Integer.parseInt(items[0]);
-                day = Integer.parseInt(items[1]);
+                year = Integer.parseInt(items[0]);
+                month = Integer.parseInt(items[1]);
             } else if (items.length == 3) {
                 year = Integer.parseInt(items[0]);
                 month = Integer.parseInt(items[1]);
