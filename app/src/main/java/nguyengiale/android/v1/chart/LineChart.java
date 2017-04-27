@@ -357,14 +357,16 @@ public class LineChart extends RelativeLayout {
                 item.lineChartItemView.setmLabelHeight(mLabelHeight);
                 item.lineChartItemView.setmLabelSize(mLabelSize);
                 if (position == 0) {
-                    item.lineChartItemView.setmStartPoint(0);
+                    item.lineChartItemView.setmStartPoint(-1);
                     item.lineChartItemView.setmCenterPoint(mListData.get(position).getPoint());
                     if (mListData.size() > position + 1)
                         item.lineChartItemView.setmEndPoint((mListData.get(position).getPoint() + mListData.get(position + 1).getPoint()) / 2);
+                    else
+                        item.lineChartItemView.setmEndPoint(mListData.get(position).getPoint());
                 } else if (position == getItemCount() - 1) {
                     item.lineChartItemView.setmStartPoint((mListData.get(position).getPoint() + mListData.get(position - 1).getPoint()) / 2);
                     item.lineChartItemView.setmCenterPoint(mListData.get(position).getPoint());
-                    item.lineChartItemView.setmEndPoint(0);
+                    item.lineChartItemView.setmEndPoint(-1);
                 } else {
                     item.lineChartItemView.setmStartPoint((mListData.get(position).getPoint() + mListData.get(position - 1).getPoint()) / 2);
                     item.lineChartItemView.setmCenterPoint(mListData.get(position).getPoint());

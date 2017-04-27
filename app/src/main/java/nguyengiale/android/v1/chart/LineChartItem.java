@@ -61,7 +61,7 @@ public class LineChartItem extends View {
         super.onDraw(canvas);
 
         if (mColor.equals("")) {
-            if (mStartPoint != 0 && mEndPoint != 0) {
+            if (mStartPoint != -1 && mEndPoint != -1) {
                 mListPolygonPoint = new Point[5];
                 mListPolygonPoint[0] = new Point(0, (int) (mHeight - mStartPoint / mMaxPoint * mHeight));
                 mListPolygonPoint[1] = new Point(mWidth / 2, (int) (mHeight - mCenterPoint / mMaxPoint * mHeight));
@@ -72,12 +72,12 @@ public class LineChartItem extends View {
 
             } else {
                 mListPolygonPoint = new Point[4];
-                if (mStartPoint != 0) {
+                if (mStartPoint != -1) {
                     mListPolygonPoint[0] = new Point(0, (int) (mHeight - mStartPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[1] = new Point(mWidth / 2, (int) (mHeight - mCenterPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[2] = new Point(mWidth / 2, mHeight);
                     mListPolygonPoint[3] = new Point(0, mHeight);
-                } else if (mEndPoint != 0) {
+                } else if (mEndPoint != -1) {
                     mListPolygonPoint[0] = new Point(mWidth / 2, (int) (mHeight - mCenterPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[1] = new Point(mWidth, (int) (mHeight - mEndPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[2] = new Point(mWidth, mHeight);
@@ -97,9 +97,9 @@ public class LineChartItem extends View {
             mPaint.setColor(Color.parseColor("#f8514f"));
             mPaint.setStrokeWidth(3);
             mPaint.setPathEffect(null);
-            if (mStartPoint != 0)
+            if (mStartPoint != -1)
                 tempCanvas.drawLine(0, mHeight - mStartPoint / mMaxPoint * mHeight, mWidth / 2, mHeight - mCenterPoint / mMaxPoint * mHeight, mPaint);
-            if (mEndPoint != 0)
+            if (mEndPoint != -1)
                 tempCanvas.drawLine(mWidth / 2, mHeight - mCenterPoint / mMaxPoint * mHeight, mWidth, mHeight - mEndPoint / mMaxPoint * mHeight, mPaint);
             tempCanvas.drawCircle(mWidth / 2, mHeight - mCenterPoint / mMaxPoint * mHeight, 7, mPaint);
 
@@ -126,7 +126,7 @@ public class LineChartItem extends View {
             canvas.drawBitmap(bitmap, 0, 0, null);
             canvas.restore();
         } else {
-            if (mStartPoint != 0 && mEndPoint != 0) {
+            if (mStartPoint != -1 && mEndPoint != -1) {
                 mListPolygonPoint = new Point[5];
                 mListPolygonPoint[0] = new Point(0, (int) (mStartPoint / mMaxPoint * mHeight));
                 mListPolygonPoint[1] = new Point(mWidth / 2, (int) (mCenterPoint / mMaxPoint * mHeight));
@@ -135,12 +135,12 @@ public class LineChartItem extends View {
                 mListPolygonPoint[4] = new Point(0, mHeight);
             } else {
                 mListPolygonPoint = new Point[4];
-                if (mStartPoint != 0) {
+                if (mStartPoint != -1) {
                     mListPolygonPoint[0] = new Point(0, (int) (mStartPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[1] = new Point(mWidth / 2, (int) (mCenterPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[2] = new Point(mWidth / 2, mHeight);
                     mListPolygonPoint[3] = new Point(0, mHeight);
-                } else if (mEndPoint != 0) {
+                } else if (mEndPoint != -1) {
                     mListPolygonPoint[0] = new Point(mWidth / 2, (int) (mCenterPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[1] = new Point(mWidth, (int) (mEndPoint / mMaxPoint * mHeight));
                     mListPolygonPoint[2] = new Point(mWidth, mHeight);
@@ -160,9 +160,9 @@ public class LineChartItem extends View {
             mPaint.setColor(Color.parseColor(mColor));
             mPaint.setStrokeWidth(3);
             mPaint.setPathEffect(null);
-            if (mStartPoint != 0)
+            if (mStartPoint != -1)
                 tempCanvas.drawLine(0, mStartPoint / mMaxPoint * mHeight, mWidth / 2, mCenterPoint / mMaxPoint * mHeight, mPaint);
-            if (mEndPoint != 0)
+            if (mEndPoint != -1)
                 tempCanvas.drawLine(mWidth / 2, mCenterPoint / mMaxPoint * mHeight, mWidth, mEndPoint / mMaxPoint * mHeight, mPaint);
             tempCanvas.drawCircle(mWidth / 2, mCenterPoint / mMaxPoint * mHeight, 7, mPaint);
 
